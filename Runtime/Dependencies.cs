@@ -8,11 +8,16 @@ namespace UnityDI {
             Definitions = new Dictionary<DependencyKey, DependencyDefinition>();
         }
 
-        public void Factory<T>(Func<Dependencies, object> factory, string name = "") {
+        public T Get<T>(string name = "") {
+            var key = new DependencyKey(name, typeof(T));
+            return (T)Definitions[key].GetValue(this);
+        }
+
+        internal void Factory<T>(Func<Dependencies, object> factory, string name = "") {
             AddDefinition<T>(factory, name, false);
         }
 
-        public void Single<T>(Func<Dependencies, object> factory, string name = "") {
+        internal void Single<T>(Func<Dependencies, object> factory, string name = "") {
             AddDefinition<T>(factory, name, true);
         }
 
@@ -23,11 +28,6 @@ namespace UnityDI {
             var key = new DependencyKey(name, typeof(T));
 
             Definitions[key] = definition;
-        }
-
-        public T Get<T>(string name = "") {
-            var key = new DependencyKey(name, typeof(T));
-            return (T)Definitions[key].GetValue(this);
         }
     }
 }

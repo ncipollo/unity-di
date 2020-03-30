@@ -3,14 +3,14 @@ namespace UnityDI {
     public class DependencyDefinition {
         private readonly Func<Dependencies, object> FactoryFunction;
         private readonly bool IsSingleton;
-        private T CachedValue;
+        private object CachedValue;
 
         public DependencyDefinition(Func<Dependencies, object> factoryFunction, bool isSingleton) {
             FactoryFunction = factoryFunction;
             IsSingleton = isSingleton;
         }
 
-        public T GetValue(Dependencies dependencies) {
+        public object GetValue(Dependencies dependencies) {
             if (CachedValue != null) {
                 return CachedValue;
             }
