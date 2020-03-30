@@ -1,0 +1,12 @@
+{
+    "author": {
+        "name": "Nick Cipollo",
+        "url": "https://github.com/ncipollo/unity-di"
+    },
+    "displayName": "Unity DI",
+    "description": "A simple dependency injection package for unity",
+    "name": "com.njc.unity-id",
+    "unity": "2019.3",
+    "unityRelease": "7f1",
+    "version": "0.0.1"
+}
