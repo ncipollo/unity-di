@@ -4,7 +4,7 @@
         "url": "https://github.com/ncipollo/unity-di"
     },
     "dependencies": {
-        "com.unity.entities": "0.8.0-preview.8"
+        "com.unity.entities": "0.6.0-preview.24"
     },
     "displayName": "Unity DI",
     "description": "A simple dependency injection package for unity",
