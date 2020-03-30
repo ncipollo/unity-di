@@ -1,11 +1,11 @@
 ﻿using System;
 namespace UnityDI {
-    public class DependencyDefinition<T> {
-        private readonly Func<Dependencies, T> FactoryFunction;
+    public class DependencyDefinition {
+        private readonly Func<Dependencies, object> FactoryFunction;
         private readonly bool IsSingleton;
         private T CachedValue;
 
-        public DependencyDefinition(Func<Dependencies, T> factoryFunction, bool isSingleton) {
+        public DependencyDefinition(Func<Dependencies, object> factoryFunction, bool isSingleton) {
             FactoryFunction = factoryFunction;
             IsSingleton = isSingleton;
         }
