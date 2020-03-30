@@ -3,6 +3,9 @@
         "name": "Nick Cipollo",
         "url": "https://github.com/ncipollo/unity-di"
     },
+    "dependencies": {
+        "com.unity.entities": "0.8.0-preview.8"
+    },
     "displayName": "Unity DI",
     "description": "A simple dependency injection package for unity",
     "name": "com.njc.unity-id",
