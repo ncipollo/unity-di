@@ -13,6 +13,17 @@ namespace UnityDI {
 
         public override int GetHashCode() => NameAndType.GetHashCode();
 
-        public override bool Equals(object obj) => NameAndType.Equals(obj);
+        public override bool Equals(object obj) {
+            // If parameter is null return false.
+            if (obj == null) {
+                return false;
+            }
+
+            // If parameter cannot be cast to Point return false.
+            if (!(obj is DependencyKey otherKey)) {
+                return false;
+            }
+            return  NameAndType.Equals(otherKey.NameAndType);
+        }
     }
 }

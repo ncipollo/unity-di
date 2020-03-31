@@ -4,8 +4,6 @@ namespace UnityDI {
     public class Injector {
         private readonly Dependencies dependencies;
 
-        public static Injector Shared = new Injector();
-
         public Injector() {
             dependencies = new Dependencies();
         }
