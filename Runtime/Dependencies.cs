@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 namespace UnityDI {
     public class Dependencies {
         private readonly Dictionary<DependencyKey, DependencyDefinition> definitions;
@@ -11,8 +12,12 @@ namespace UnityDI {
         public T Get<T>(string name = "", Parameters parameters = default) {
             var key = new DependencyKey(name, typeof(T));
             var getter = new DependencyGetter(this, parameters ?? Parameters.Empty);
-            
-            return (T)definitions[key].GetValue(getter);
+            try {
+                return (T) definitions[key].GetValue(getter);
+            }
+            catch (KeyNotFoundException) {
+                throw new MissingDependencyException(key);
+            }
         }
 
         internal void Factory<T>(Func<DependencyGetter, object> factory, string name = "") {

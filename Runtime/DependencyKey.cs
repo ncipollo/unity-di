@@ -21,5 +21,7 @@ namespace UnityDI {
             }
             return  nameAndType.Equals(otherKey.nameAndType);
         }
+
+        public override string ToString() => $"type: {nameAndType.Item2} and key: {nameAndType.Item1}";
     }
 }

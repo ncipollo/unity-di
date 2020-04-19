@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,6 +16,16 @@ namespace UnityDI {
             this.values = values.ToList();
         }
 
-        public T Get<T>(int index) => (T) values[index];
+        public T Get<T>(int index) {
+            try {
+                return (T) values[index];
+            }
+            catch (ArgumentOutOfRangeException) {
+                throw new MissingParameterException(index, typeof(T));
+            }
+            catch (InvalidCastException) {
+                throw new MissingParameterException(index, typeof(T));
+            }
+        } 
     }
 }
