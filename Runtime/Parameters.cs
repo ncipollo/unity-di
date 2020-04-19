@@ -15,6 +15,6 @@ namespace UnityDI {
             this.values = values.ToList();
         }
 
-        public object this[int index] => values[index];
+        public T Get<T>(int index) => (T) values[index];
     }
 }

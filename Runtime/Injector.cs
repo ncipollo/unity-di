@@ -13,8 +13,8 @@ namespace UnityDI {
             moduleFactory(module);
         }
 
-        public T Get<T>(string name = "") => dependencies.Get<T>(name);
+        public T Get<T>(string name = "", Parameters parameters = default) => dependencies.Get<T>(name, parameters);
 
-        public T Inject<T>(string name = "") => Get<T>(name);
+        public T Inject<T>(string name = "", Parameters parameters = default) => Get<T>(name, parameters);
     }
 }
