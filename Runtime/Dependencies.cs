@@ -2,32 +2,34 @@
 using System.Collections.Generic;
 namespace UnityDI {
     public class Dependencies {
-        private readonly Dictionary<DependencyKey, DependencyDefinition> Definitions;
+        private readonly Dictionary<DependencyKey, DependencyDefinition> definitions;
 
         public Dependencies() {
-            Definitions = new Dictionary<DependencyKey, DependencyDefinition>();
+            definitions = new Dictionary<DependencyKey, DependencyDefinition>();
         }
 
-        public T Get<T>(string name = "") {
+        public T Get<T>(string name = "", Parameters parameters = default) {
             var key = new DependencyKey(name, typeof(T));
-            return (T)Definitions[key].GetValue(this);
+            var getter = new DependencyGetter(this, parameters ?? Parameters.Empty);
+            
+            return (T)definitions[key].GetValue(getter);
         }
 
-        internal void Factory<T>(Func<Dependencies, object> factory, string name = "") {
+        internal void Factory<T>(Func<DependencyGetter, object> factory, string name = "") {
             AddDefinition<T>(factory, name, false);
         }
 
-        internal void Single<T>(Func<Dependencies, object> factory, string name = "") {
+        internal void Single<T>(Func<DependencyGetter, object> factory, string name = "") {
             AddDefinition<T>(factory, name, true);
         }
 
-        private void AddDefinition<T>(Func<Dependencies, object> factory,
+        private void AddDefinition<T>(Func<DependencyGetter, object> factory,
             string name,
             bool isSingleton) {
             var definition = new DependencyDefinition(factory, isSingleton);
             var key = new DependencyKey(name, typeof(T));
 
-            Definitions[key] = definition;
+            definitions[key] = definition;
         }
     }
 }

@@ -1,17 +1,13 @@
 ﻿using System;
 namespace UnityDI {
     internal class DependencyKey {
-        private readonly string Name;
-        private readonly Type Type;
-        private readonly Tuple<string, Type> NameAndType;
+        private readonly Tuple<string, Type> nameAndType;
 
         public DependencyKey(string name, Type type) {
-            Name = name;
-            Type = type;
-            NameAndType = Tuple.Create(Name, Type);
+            nameAndType = Tuple.Create(name, type);
         }
 
-        public override int GetHashCode() => NameAndType.GetHashCode();
+        public override int GetHashCode() => nameAndType.GetHashCode();
 
         public override bool Equals(object obj) {
             // If parameter is null return false.
@@ -23,7 +19,7 @@ namespace UnityDI {
             if (!(obj is DependencyKey otherKey)) {
                 return false;
             }
-            return  NameAndType.Equals(otherKey.NameAndType);
+            return  nameAndType.Equals(otherKey.nameAndType);
         }
     }
 }

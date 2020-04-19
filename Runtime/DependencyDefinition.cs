@@ -1,23 +1,23 @@
 ﻿using System;
 namespace UnityDI {
     public class DependencyDefinition {
-        private readonly Func<Dependencies, object> FactoryFunction;
-        private readonly bool IsSingleton;
-        private object CachedValue;
+        private readonly Func<DependencyGetter, object> factoryFunction;
+        private readonly bool isSingleton;
+        private object cachedValue;
 
-        public DependencyDefinition(Func<Dependencies, object> factoryFunction, bool isSingleton) {
-            FactoryFunction = factoryFunction;
-            IsSingleton = isSingleton;
+        public DependencyDefinition(Func<DependencyGetter, object> factoryFunction, bool isSingleton) {
+            this.factoryFunction = factoryFunction;
+            this.isSingleton = isSingleton;
         }
 
-        public object GetValue(Dependencies dependencies) {
-            if (CachedValue != null) {
-                return CachedValue;
+        internal object GetValue(DependencyGetter getter) {
+            if (cachedValue != null) {
+                return cachedValue;
             }
 
-            var value = FactoryFunction(dependencies);
-            if(IsSingleton) {
-                CachedValue = value;
+            var value = factoryFunction(getter);
+            if(isSingleton) {
+                cachedValue = value;
             }
 
             return value;

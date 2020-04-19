@@ -7,11 +7,11 @@ namespace UnityDI {
             this.dependencies = dependencies;
         }
 
-        public void Factory<T>(Func<Dependencies, object> factory) {
+        public void Factory<T>(Func<DependencyGetter, object> factory) {
             dependencies.Factory<T>(factory);
         }
 
-        public void Single<T>(Func<Dependencies, object> factory) {
+        public void Single<T>(Func<DependencyGetter, object> factory) {
             dependencies.Single<T>(factory);
         }
 
@@ -26,11 +26,11 @@ namespace UnityDI {
                 this.name = name;
             }
 
-            public void Factory<T>(Func<Dependencies, object> factory) {
+            public void Factory<T>(Func<DependencyGetter, object> factory) {
                 dependencies.Factory<T>(factory, name);
             }
 
-            public void Single<T>(Func<Dependencies, object> factory) {
+            public void Single<T>(Func<DependencyGetter, object> factory) {
                 dependencies.Single<T>(factory, name);
             }
         }
